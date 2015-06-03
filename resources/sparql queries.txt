@@ -11,7 +11,6 @@ WHERE {
 ?o2 a qb:Observation . 
 ?o1 ?d1 ?v1. 
 ?o2 ?d1 ?v2. 
-?d1 rdf:type qb:Dimension .
 ?v1 skos:broaderTransitive/skos:broaderTransitive+ ?v2
 
 }
@@ -25,7 +24,6 @@ WHERE
 ?o2 a qb:Observation . 
 ?o1 ?d1 ?v1. 
 ?o2 ?d1 ?v2. 
-?d1 rdf:type qb:Dimension .
 ?v1 skos:broaderTransitive/skos:broaderTransitive+ ?v2
 }
 
@@ -44,11 +42,9 @@ WHERE {
 ?o2 a qb:Observation . 
 ?o1 ?d1 ?v1. 
 ?o2 ?d1 ?v2. 
-?d1 rdf:type qb:Dimension .
 ?v1 skos:broaderTransitive/skos:broaderTransitive+ ?v2
 	?o1 ?d2 ?v12 . 	
 	?o2 ?d2 ?v22 .
-	?d2 rdf:type qb:Dimension . 
 	FILTER NOT EXISTS {
 OPTIONAL {
 		?v12 skos:broaderTransitive/skos:broaderTransitive+ ?v22
@@ -73,11 +69,9 @@ WHERE {
 ?o2 a qb:Observation . 
 ?o1 ?d1 ?v1. 
 ?o2 ?d1 ?v1. 
-?d1 rdf:type qb:Dimension .
 	FILTER NOT EXISTS {
 		?o1 ?d2 ?v12 . 
 		?o2 ?d2 ?v22 . 
-	?d2 rdf:type qb:Dimension .
 		FILTER(?v12!=?v22)
 	}
 }
