@@ -1,0 +1,84 @@
+CONSTRUCT {
+ 	[
+  rdf:type imis:PartialContainment ;
+ 	  imis:containedObservation ?o1 ; 
+	  imis:containingObservation ?o2 ; 
+#	other metadata can be added about the containment here
+	]
+}
+WHERE { 
+?o1 a qb:Observation . 
+?o2 a qb:Observation . 
+?o1 ?d1 ?v1. 
+?o2 ?d1 ?v2. 
+?d1 rdf:type qb:Dimension .
+?v1 skos:broaderTransitive/skos:broaderTransitive+ ?v2
+
+}
+
+Partial Containment (detection): 
+
+SELECT ?o1, ?o2, ?d1 
+WHERE
+{ 
+?o1 a qb:Observation . 
+?o2 a qb:Observation . 
+?o1 ?d1 ?v1. 
+?o2 ?d1 ?v2. 
+?d1 rdf:type qb:Dimension .
+?v1 skos:broaderTransitive/skos:broaderTransitive+ ?v2
+}
+
+Full Containment:
+
+CONSTRUCT {
+ 	[
+  rdf:type imis:FullContainment ;
+ 	  imis:containedObservation ?o1 ; 
+	  imis:containingObservation ?o2 ; 
+#	other metadata can be added about the containment here
+	]
+}
+WHERE { 
+?o1 a qb:Observation . 
+?o2 a qb:Observation . 
+?o1 ?d1 ?v1. 
+?o2 ?d1 ?v2. 
+?d1 rdf:type qb:Dimension .
+?v1 skos:broaderTransitive/skos:broaderTransitive+ ?v2
+	?o1 ?d2 ?v12 . 	
+	?o2 ?d2 ?v22 .
+	?d2 rdf:type qb:Dimension . 
+	FILTER NOT EXISTS {
+OPTIONAL {
+		?v12 skos:broaderTransitive/skos:broaderTransitive+ ?v22
+}
+FILTER (!BOUND(?v22)
+}
+}
+
+
+Complementarity:
+
+CONSTRUCT {
+ 	[
+  rdf:type imis:Complement;
+ 	  imis:observation ?o1 ; 
+	  imis:observation ?o2 ; 
+#	other metadata can be added about the containment here
+	]
+}
+WHERE { 
+?o1 a qb:Observation . 
+?o2 a qb:Observation . 
+?o1 ?d1 ?v1. 
+?o2 ?d1 ?v1. 
+?d1 rdf:type qb:Dimension .
+	FILTER NOT EXISTS {
+		?o1 ?d2 ?v12 . 
+		?o2 ?d2 ?v22 . 
+	?d2 rdf:type qb:Dimension .
+		FILTER(?v12!=?v22)
+	}
+}
+

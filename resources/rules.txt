@@ -1,0 +1,43 @@
+@prefix qb: <http://purl.org/linked-data/cube#>.
+@prefix imis: <http://imis.gr#>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>
+[partial_cont: 
+(?o1 rdf:type qb:Observation) 
+(?o2 rdf:type qb:Observation) 
+(?d rdf:type qb:DimensionProperty)
+(?o1 ?d ?v1) 
+(?o2 ?d ?v2) 
+notEqual(?v1, ?v2)
+notEqual(?o1, ?o2)
+(?v1 skos:broaderTransitive ?v2)
+ -> (?o2 imis:part ?o1)]
+
+
+[full_cont: 
+(?o1 rdf:type qb:Observation) 
+(?o2 rdf:type qb:Observation) 
+(?d rdf:type qb:DimensionProperty)
+(?d2 rdf:type qb:DimensionProperty)
+(?o1 ?d ?v1) 
+(?o2 ?d ?v2) 
+notEqual(?v1, ?v2)
+notEqual(?o1, ?o2)
+(?v1 skos:broaderTransitive ?v2)
+(?o1 ?d2 ?v12)
+(?o2 ?d2 ?v22)
+(?v12 skos:broaderTransitive ?v22)
+ -> (?o2 imis:full ?o1)]
+
+
+[compl:
+(?o1 rdf:type qb:Observation) 
+(?o2 rdf:type qb:Observation) 
+(?d rdf:type qb:DimensionProperty)
+(?o1 all(?d) ?v1) 
+(?o2 all(?d) ?v1) 
+notEqual(?o1, ?o2)
+(?o1 ?d2 ?v12)
+(?o2 ?d2 ?v22)
+(?v12 skos:broaderTransitive ?v22)
+ -> (?o2 imis:full ?o1)]
