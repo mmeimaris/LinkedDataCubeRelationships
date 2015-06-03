@@ -1,0 +1,69 @@
+The named graphs used for the cube data and terms are the following:
+
+<http://linked-statistics.gr/res_pop_by_citizenship_sex_age.php>
+<http://linked-statistics.gr/res_pop_by_age_sex_education.php>
+<http://linked-statistics.gr/dataDump/demographic/A1602_SAM03_TB_DC_00_2011_12A_F_GR-20150201041458>
+<http://linked-statistics.gr/res_pop_by_citizenship_sex_age.php>
+<http://linked-statistics.gr/households_hmembers_by_hsize.php>
+<http://linked-statistics.gr/res_pop_by_age_sex_education.php>
+<http://estatwrap.ontologycentral.com/page/demo_r_births>
+<http://estatwrap.ontologycentral.com/page/demo_r_magec>
+<http://estatwrap.ontologycentral.com/page/nama_r_e3gdp>
+<http://estatwrap.ontologycentral.com/page/nama_r_e2rem>
+<codelists.age>
+<codelists.sex>
+<codelists.location>
+<codelists.admin.divisions>
+<codelists.sameas>
+<codelists.rest>
+
+These can be accessed in the endpoint using the credentials that were submitted through Easychair.
+Using a CONSTRUCT query, we can get the data as an RDF graph dump as follows:
+
+CONSTRUCT { 	
+?s ?p ?o 
+}
+FROM <http://linked-statistics.gr/res_pop_by_citizenship_sex_age.php>
+FROM <http://linked-statistics.gr/res_pop_by_age_sex_education.php>
+FROM <http://linked-statistics.gr/dataDump/demographic/A1602_SAM03_TB_DC_00_2011_12A_F_GR-20150201041458>
+FROM <http://linked-statistics.gr/res_pop_by_citizenship_sex_age.php>
+FROM <http://linked-statistics.gr/households_hmembers_by_hsize.php>
+FROM <http://linked-statistics.gr/res_pop_by_age_sex_education.php>
+FROM <http://estatwrap.ontologycentral.com/page/demo_r_births>
+FROM <http://estatwrap.ontologycentral.com/page/demo_r_magec>
+FROM <http://estatwrap.ontologycentral.com/page/nama_r_e3gdp>
+FROM <http://estatwrap.ontologycentral.com/page/nama_r_e2rem>
+FROM <codelists.age>
+FROM <codelists.sex>
+FROM <codelists.location>
+FROM <codelists.admin.divisions>
+FROM <codelists.sameas>
+FROM <qb-definitions>
+WHERE { 
+?s ?p ?o
+}
+
+Using a SELECT query we can do a projection on the data withouth creating an RDF graph, as follows:
+SELECT * 
+FROM <http://linked-statistics.gr/res_pop_by_citizenship_sex_age.php>
+FROM <http://linked-statistics.gr/res_pop_by_age_sex_education.php>
+FROM <http://linked-statistics.gr/dataDump/demographic/A1602_SAM03_TB_DC_00_2011_12A_F_GR-20150201041458>
+FROM <http://linked-statistics.gr/res_pop_by_citizenship_sex_age.php>
+FROM <http://linked-statistics.gr/households_hmembers_by_hsize.php>
+FROM <http://linked-statistics.gr/res_pop_by_age_sex_education.php>
+FROM <http://estatwrap.ontologycentral.com/page/demo_r_births>
+FROM <http://estatwrap.ontologycentral.com/page/demo_r_magec>
+FROM <http://estatwrap.ontologycentral.com/page/nama_r_e3gdp>
+FROM <http://estatwrap.ontologycentral.com/page/nama_r_e2rem>
+FROM <codelists.age>
+FROM <codelists.sex>
+FROM <codelists.location>
+FROM <codelists.admin.divisions>
+FROM <codelists.sameas>
+FROM <qb-definitions>
+WHERE { 
+?s ?p ?o
+}
+
+Using appropriate limitations in the result set (with the LIMIT keyword) we can get back a subset of the data.
+
